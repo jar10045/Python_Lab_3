@@ -6,21 +6,17 @@ def smtp_client(port='1025', mailserver='127.0.0.1'):
    endmsg = "\r\n.\r\n"
 
    # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
-
+   mailserver='smtp.nyu.edu'
+   mailport='25'
    # Create socket called clientSocket and establish a TCP connection with mailserver and port
    clientSocket = socket(AF_INET, SOCK_STREAM)
-   clientSocket.bind ((mailserver, 1025))
-   clientSocket.connect(mailserver, 1025)
+   clientSocket.bind (mailserver, mailport)
+   clientSocket.connect(mailserver, mailport)
    clientSocket.listen(1)
-   connectionSocket, addr = clientSocket.accept()
-
-
-
-
-
-
+   #connectionSocket, addr = clientSocket.accept()
    recv = clientSocket.recv(1024).decode()
    #print(recv)
+
    if recv[:3] != '220':
    #print('220 reply not received from server.')
       pass
@@ -72,6 +68,8 @@ def smtp_client(port='1025', mailserver='127.0.0.1'):
    message = clientSocket.recv(1024)
    #print(message)
    clientSocket.close()
+
+close()
 
 if __name__ == '__main__':
    smtp_client(1025, '127.0.0.1')
