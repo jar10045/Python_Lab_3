@@ -6,7 +6,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    endmsg = "\r\n.\r\n"
 
    # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
-   mailserver='localhost'
+   mailserver='smtp.nyu.edu'
    port=25
 
    # Create socket called clientSocket and establish a TCP connection with mailserver and port
@@ -20,7 +20,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    recv = clientSocket.recv(1024).decode()
 
    if recv[:3] != '220':
-      pass  
+      pass
 
    # Send HELO command and print server response.
    heloCommand = 'HELO Alice\r\n'
