@@ -19,8 +19,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
       pass
 
    # Send HELO command and print server response.
-   heloCommand = 'HELO Alice\r\n'
-   clientSocket.send(heloCommand.encode())
+   HELO = 'HELO Alice\r\n'
+   clientSocket.send(HELO.encode())
    clientSocket.listen(1)
    recv1 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
@@ -28,8 +28,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
 
    # Send MAIL FROM command and print server response.
-   MAILFROM = "MAIL FROM: <jar10045@nyu.edu> \r\n"
-   clientSocket.send(MAILFROM.encode())
+   MAIL = "MAIL FROM: <jar10045@nyu.edu> \r\n"
+   clientSocket.send(MAIL.encode())
    clientSocket.listen(1)
    recv2 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
@@ -37,24 +37,24 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
 
    # Send RCPT TO command and print server response.
-   RCPTTO= "RCPT TO: <jar10045@nyu.edu> \r\n"
-   clientSocket.send(RCPTTO.encode())
+   RCPT = "RCPT TO: <jar10045@nyu.edu> \r\n"
+   clientSocket.send(RCPT.encode())
    clientSocket.listen(1)
    recv3 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
 
    # Send DATA command and print server response.
-   data = "DATA\r\n"
-   clientSocket.send(data.encode())
+   DATA = "DATA\r\n"
+   clientSocket.send(DATA.encode())
    clientSocket.listen(1)
    recv4 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
 
    # Send message data.
-   subject = "Subject: SMTP mail client testing \r\n\r\n"
-   clientSocket.send(subject.encode())
+   SUBJECT = "Subject: SMTP mail client testing \r\n\r\n"
+   clientSocket.send(SUBJECT.encode())
    clientSocket.send(msg.encode())
    clientSocket.send(endmsg.encode())
    clientSocket.listen(1)
@@ -63,9 +63,9 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    if recv[:3] != '250':
       pass
    # Message ends with a single period.
-   endmsg = "\r\n.\r\n"
+   ENDMSG = "\r\n.\r\n"
    clientSocket.send(msg.encode())
-   clientSocket.send(endmsg.encode())
+   clientSocket.send(ENDMSG.encode())
    recv5= clientSocket.recv(1024).decode()
    if recv[:3] !='250':
       pass
