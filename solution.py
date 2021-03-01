@@ -62,8 +62,8 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
  ENDMSG = "\r\n.\r\n"
  clientSocket.send(ENDMSG.encode())
  recv= clientSocket.recv(1024).decode()
- if recv[:3] !='250':
-    pass
+ #if recv[:3] !='250':
+    #pass
 
  # Send QUIT command and get server response.
  clientSocket.send("QUIT\r\n".encode())
