@@ -37,8 +37,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
 
    # Send RCPT TO command and print server response.
-   rcptTo= "RCPT TO: <jar10045@nyu.edu> \r\n"
-   clientSocket.send(rcptTo.encode())
+   RCPTTO= "RCPT TO: <jar10045@nyu.edu> \r\n"
+   clientSocket.send(RCPTTO.encode())
    clientSocket.listen(1)
    recv3 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
