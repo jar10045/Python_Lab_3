@@ -1,7 +1,7 @@
 from socket import *
 
 
-def smtp_client(port=1025, mailserver='smtp.gmail.com'):
+def smtp_client(port=1025, mailserver='127.0.0.1'):
    msg = "\r\n My message"
    endmsg = "\r\n.\r\n"
 
@@ -31,7 +31,7 @@ def smtp_client(port=1025, mailserver='smtp.gmail.com'):
 
 
    # Send MAIL FROM command and print server response.
-   mailFrom = "MAIL FROM: <jason.a.rivera@gmail.com> \r\n"
+   mailFrom = "MAIL FROM: <jar10045@nyu.edu> \r\n"
    clientSocket.send(mailFrom.encode())
    recv2 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
@@ -39,7 +39,7 @@ def smtp_client(port=1025, mailserver='smtp.gmail.com'):
 
 
    # Send RCPT TO command and print server response.
-   rcptTo= "RCPT TO: <jason.a.rivera@gmail.com> \r\n"
+   rcptTo= "RCPT TO: <jar10045@nyu.edu> \r\n"
    clientSocket.send(rcptTo.encode())
    recv3 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
@@ -62,7 +62,7 @@ def smtp_client(port=1025, mailserver='smtp.gmail.com'):
       pass
    # Message ends with a single period.
    endmsg = "\r\n.\r\n"
-   clientSocket.send(msg + endmsg)
+   clientSocket.send(msg + endmsg.encode())
    if recv1[:3] !='250':
       pass
    # Send QUIT command and get server response.
@@ -73,4 +73,4 @@ def smtp_client(port=1025, mailserver='smtp.gmail.com'):
 
 
 if __name__ == '__main__':
-   smtp_client(1025, 'smtp.gmail.com')
+   smtp_client(1025, '127.0.0.1')
