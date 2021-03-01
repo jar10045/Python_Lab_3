@@ -6,14 +6,13 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
  endmsg = "\r\n.\r\n"
 
 
-
 # Create socket called clientSocket and establish a TCP connection with mailserver and port
  clientSocket = socket(AF_INET, SOCK_STREAM)
  clientSocket.connect((mailserver, port))
  clientSocket.listen(1)
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '220':
-    pass
+    pass 
 
  # Send HELO command and print server response.
  HELOCommand = 'HELO Alice\r\n'
