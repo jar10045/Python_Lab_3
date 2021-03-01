@@ -1,7 +1,7 @@
 from socket import *
 
 
-def smtp_client(port=1025, mailserver='127.0.0.1'):
+def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
  msg = "\r\n My message"
  endmsg = "\r\n.\r\n"
 
@@ -12,7 +12,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
  clientSocket.listen(1)
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '220':
-    pass 
+    pass
 
  # Send HELO command and print server response.
  HELOCommand = 'HELO Alice\r\n'
@@ -73,4 +73,4 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
 
  if __name__ == '__main__':
-    smtp_client(1025, '127.0.0.1')
+    smtp_client(1025, 'smtp.nyu.edu')
