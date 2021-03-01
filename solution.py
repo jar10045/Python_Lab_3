@@ -13,7 +13,6 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    clientSocket = socket(AF_INET, SOCK_STREAM)
    clientSocket.connect((mailserver, port))
    clientSocket.listen(1)
-   #connectionSocket.addr = clientSocket.accept()
    recv = clientSocket.recv(1024).decode()
 
    if recv[:3] != '220':
@@ -22,16 +21,16 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    # Send HELO command and print server response.
    heloCommand = 'HELO Alice\r\n'
    clientSocket.send(heloCommand.encode())
+   clientSocket.listen(1)
    recv1 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
 
 
-
-
    # Send MAIL FROM command and print server response.
    MAILFROM = "MAIL FROM: <jar10045@nyu.edu> \r\n"
    clientSocket.send(MAILFROM.encode())
+   clientSocket.listen(1)
    recv2 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
@@ -40,6 +39,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    # Send RCPT TO command and print server response.
    rcptTo= "RCPT TO: <jar10045@nyu.edu> \r\n"
    clientSocket.send(rcptTo.encode())
+   clientSocket.listen(1)
    recv3 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
@@ -47,6 +47,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    # Send DATA command and print server response.
    data = "DATA\r\n"
    clientSocket.send(data.encode())
+   clientSocket.listen(1)
    recv4 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
@@ -56,6 +57,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    clientSocket.send(subject.encode())
    clientSocket.send(msg.encode())
    clientSocket.send(endmsg.encode())
+   clientSocket.listen(1)
    recv_msg = clientSocket.recv(1024).decode()
 
    if recv[:3] != '250':
@@ -65,7 +67,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    clientSocket.send(msg.encode())
    clientSocket.send(endmsg.encode())
    recv5= clientSocket.recv(1024).decode()
-   if recv1[:3] !='250':
+   if recv[:3] !='250':
       pass
 
    # Send QUIT command and get server response.
