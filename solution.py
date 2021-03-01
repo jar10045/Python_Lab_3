@@ -31,8 +31,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
 
    # Send MAIL FROM command and print server response.
-   mailFrom = "MAIL FROM: <jar10045@nyu.edu> \r\n"
-   clientSocket.send(mailFrom.encode())
+   MAILFROM = "MAIL FROM: <jar10045@nyu.edu> \r\n"
+   clientSocket.send(MAILFROM.encode())
    recv2 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
@@ -51,6 +51,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    recv4 = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
       pass
+
    # Send message data.
    subject = "Subject: SMTP mail client testing \r\n\r\n"
    clientSocket.send(subject.encode())
@@ -58,13 +59,15 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    clientSocket.send(endmsg.encode())
    recv_msg = clientSocket.recv(1024).decode()
 
-   if recv[:3] != '220':
+   if recv[:3] != '250':
       pass
    # Message ends with a single period.
    endmsg = "\r\n.\r\n"
-   clientSocket.send(msg + endmsg.encode())
+   clientSocket.send(msg.encode())
+   clientSocket.send(endmsg.encode())
    if recv1[:3] !='250':
       pass
+
    # Send QUIT command and get server response.
    clientSocket.send("QUIT\r\n".encode())
    message = clientSocket.recv(1024).decode()
