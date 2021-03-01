@@ -13,14 +13,14 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    clientSocket = socket(AF_INET, SOCK_STREAM)
    clientSocket.connect((mailserver, port))
    clientSocket.listen(1)
-   recv = clientSocket.recv(1024).decode()
 
+   recv = clientSocket.recv(1024).decode()
    if recv[:3] != '220':
       pass
 
    # Send HELO command and print server response.
-   HELO = 'HELO Alice\r\n'
-   clientSocket.send(HELO.encode())
+   HELOCommand = 'HELO Alice\r\n'
+   clientSocket.send(HELOCommand.encode())
    clientSocket.listen(1)
    recv = clientSocket.recv(1024).decode()
    if recv[:3] != '250':
@@ -59,9 +59,9 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    clientSocket.send(ENDMSG.encode())
    clientSocket.listen(1)
    recv = clientSocket.recv(1024).decode()
-
    if recv[:3] != '250':
       pass
+   
    # Message ends with a single period.
    ENDMSG = "\r\n.\r\n"
    clientSocket.send(ENDMSG.encode())
