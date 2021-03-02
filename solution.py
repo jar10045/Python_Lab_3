@@ -1,9 +1,9 @@
 from socket import *
 
 
-def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
- MSG = "\r\n My message"
- ENDMSG = "\r\n.\r\n"
+def smtp_client(port=1025, mailserver='127.0.0.1'):
+ msg = "\r\n My message"
+ endmsg = "\r\n.\r\n"
 
 
 # Create socket called clientSocket and establish a TCP connection with mailserver and port
@@ -14,56 +14,57 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
     pass
 
  # Send HELO command and print server response.
- HELO = 'HELO Alice\r\n'
- clientSocket.send(HELO.encode())
- recv = clientSocket.recv(1024).decode()
- if recv[:3] != '250':
+ heloCommand = 'HELO Alice\r\n'
+ clientSocket.send(heloCommand.encode())
+ recv1 = clientSocket.recv(1024).decode()
+ if recv1[:3] != '250':
     pass
 
 
  # Send MAIL FROM command and print server response.
- MAILFROM = "MAIL FROM: <jar10045@nyu.edu> \r\n"
- clientSocket.send(MAILFROM.encode())
- recv = clientSocket.recv(1024).decode()
- if recv[:3] != '250':
+ mailfrom = "MAIL FROM: <jar10045@nyu.edu> \r\n"
+ clientSocket.send(mailfrom.encode())
+ recv2 = clientSocket.recv(1024).decode()
+ if recv2[:3] != '250':
     pass
 
 
  # Send RCPT TO command and print server response.
  RCPTTO = "RCPT TO: <jar10045@nyu.edu> \r\n"
  clientSocket.send(RCPTTO.encode())
- recv = clientSocket.recv(1024).decode()
- if recv[:3] != '250':
+ recv3 = clientSocket.recv(1024).decode()
+ if recv3[:3] != '250':
     pass
 
  # Send DATA command and print server response.
  DATA = "DATA\r\n"
  clientSocket.send(DATA.encode())
- recv = clientSocket.recv(1024).decode()
- if recv[:3] != '250':
+ recv4 = clientSocket.recv(1024).decode()
+ if recv4[:3] != '250':
     pass
 
  # Send message data.
  SUBJECT = "Subject: SMTP mail client testing \r\n\r\n"
  clientSocket.send(SUBJECT.encode())
- clientSocket.send(MSG.encode())
- recv = clientSocket.recv(1024).decode()
- if recv[:3] != '250':
+ clientSocket.send(msg.encode())
+ recv5 = clientSocket.recv(1024).decode()
+ if recv5[:3] != '250':
     pass
 
  # Message ends with a single period.
- clientSocket.send(ENDMSG.encode())
- recv = clientSocket.recv(1024).decode()
- if recv[:3] !='250':
+ full_message = msg + endmsg
+ clientSocket.send(full_message.encode())
+ recv6 = clientSocket.recv(1024).decode()
+ if recv6[:3] !='250':
     pass
 
  # Send QUIT command and get server response.
  QUIT = "QUIT\r\n"
  clientSocket.send(QUIT.encode())
- recv = clientSocket.recv(1024).decode()
+ msg = clientSocket.recv(1024).decode()
  clientSocket.close()
 
 
 
  if __name__ == '__main__':
-    smtp_client(1025, 'smtp.nyu.edu')
+    smtp_client(1025, '127.0.0.1')
