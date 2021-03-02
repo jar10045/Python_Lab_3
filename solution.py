@@ -59,14 +59,14 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
  # Message ends with a single period.
  ENDMSG = "\r\n.\r\n"
  clientSocket.send(ENDMSG.encode())
- recv= clientSocket.recv(1024).decode()
+ recv = clientSocket.recv(1024).decode()
  if recv[:3] !='250':
     pass
 
  # Send QUIT command and get server response.
  QUIT = "QUIT\r\n"
  clientSocket.send(QUIT.encode())
- MSG = clientSocket.recv(1024).decode()
+ recv = clientSocket.recv(1024).decode()
  clientSocket.close()
 
 
