@@ -8,7 +8,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
    #Create socket called clientSocket and establish a TCP connection with mailserver and port
    clientSocket = socket(AF_INET, SOCK_STREAM)
-   clientSocket.connect((port, mailserver))
+   clientSocket.connect((mailserver, port))
    recv = clientSocket.recv(1024).decode()
    if recv[:3] != '220':
       pass
@@ -59,10 +59,11 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
       pass
 
    #Send QUIT command and get server response.
-   QUIT = "QUIT\r\n"
-   clientSocket.send(QUIT.encode())
-   msg = clientSocket.recv(1024).decode()
-   clientSocket.close()
+   QUIT = "QUIT\r\n".encode()
+   clientSocket.send(QUIT)
+   recv7 = clientSocket.recv(1024).decode()
+   if recv7[:3] !='250':
+      pass
 
 
 if __name__ == '__main__':
