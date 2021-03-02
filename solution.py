@@ -2,8 +2,8 @@ from socket import *
 
 
 def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
- msg = "\r\n My message"
- endmsg = "\r\n.\r\n"
+ MSG = "\r\n My message"
+ ENDMSG = "\r\n.\r\n"
 
 
 # Create socket called clientSocket and establish a TCP connection with mailserver and port
@@ -15,8 +15,8 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
     pass
 
  # Send HELO command and print server response.
- HELOCommand = 'HELO Alice\r\n'
- clientSocket.send(HELOCommand.encode())
+ HELO = 'HELO Alice\r\n'
+ clientSocket.send(HELO.encode())
  clientSocket.listen(1)
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '250':
@@ -24,8 +24,8 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
 
 
  # Send MAIL FROM command and print server response.
- MAIL = "MAIL FROM: <jar10045@nyu.edu> \r\n"
- clientSocket.send(MAIL.encode())
+ MAILFROM = "MAIL FROM: <jar10045@nyu.edu> \r\n"
+ clientSocket.send(MAILFROM.encode())
  clientSocket.listen(1)
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '250':
@@ -33,8 +33,8 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
 
 
  # Send RCPT TO command and print server response.
- RCPT = "RCPT TO: <jar10045@nyu.edu> \r\n"
- clientSocket.send(RCPT.encode())
+ RCPTTO = "RCPT TO: <jar10045@nyu.edu> \r\n"
+ clientSocket.send(RCPTTO.encode())
  clientSocket.listen(1)
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '250':
@@ -51,8 +51,6 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
  # Send message data.
  SUBJECT = "Subject: SMTP mail client testing \r\n\r\n"
  clientSocket.send(SUBJECT.encode())
- clientSocket.send(msg.encode())
- clientSocket.send(endmsg.encode())
  clientSocket.listen(1)
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '250':
@@ -62,12 +60,13 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
  ENDMSG = "\r\n.\r\n"
  clientSocket.send(ENDMSG.encode())
  recv= clientSocket.recv(1024).decode()
- #if recv[:3] !='250':
-    #pass
+ if recv[:3] !='250':
+    pass
 
  # Send QUIT command and get server response.
- clientSocket.send("QUIT\r\n".encode())
- msg = clientSocket.recv(1024).decode()
+ QUIT = "QUIT\r\n"
+ clientSocket.send(QUIT.encode())
+ MSG = clientSocket.recv(1024).decode()
  clientSocket.close()
 
 
