@@ -46,12 +46,12 @@ def smtp_client(port=1025, mailserver='smtp.nyu.edu'):
  # Send message data.
  SUBJECT = "Subject: SMTP mail client testing \r\n\r\n"
  clientSocket.send(SUBJECT.encode())
+ clientSocket.send(MSG.encode())
  recv = clientSocket.recv(1024).decode()
  if recv[:3] != '250':
     pass
 
  # Message ends with a single period.
- ENDMSG = "\r\n.\r\n"
  clientSocket.send(ENDMSG.encode())
  recv = clientSocket.recv(1024).decode()
  if recv[:3] !='250':
