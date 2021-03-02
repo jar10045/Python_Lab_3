@@ -47,13 +47,12 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    SUBJECT = "Subject: SMTP mail client testing \r\n\r\n"
    clientSocket.send(SUBJECT.encode())
    clientSocket.send(msg.encode())
-   recv5 = clientSocket.recv(1024).decode()
-   if recv5[:3] != '250':
-      pass
+   #recv5 = clientSocket.recv(1024).decode()
+   #if recv5[:3] != '250':
+    #  pass
 
    #Message ends with a single period.
-   full_message = msg + endmsg
-   clientSocket.send(full_message.encode())
+   clientSocket.send(endmsg.encode())
    recv6 = clientSocket.recv(1024).decode()
    if recv6[:3] !='250':
       pass
